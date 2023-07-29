@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+key_id=$(jq -r .key_id)
+readonly key_id
+
+armored_key=$(gpg --armor --export "${key_id}")
+readonly armored_key
+
+jq -n --arg armored_key "${armored_key}" '{"armored_key":$armored_key}'
