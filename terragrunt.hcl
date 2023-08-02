@@ -1,10 +1,14 @@
 terragrunt_version_constraint = ">= 0.48.0" # Terraform 1.5.x
 
+locals {
+  filename_prefix = "terragrunt"
+}
+
 remote_state {
   backend = "gcs"
 
   generate = {
-    path      = "terragrunt_backend.tf"
+    path      = "${local.filename_prefix}_backend.tf"
     if_exists = "overwrite_terragrunt"
   }
 
